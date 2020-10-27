@@ -2,25 +2,28 @@
   <div class="card card-container">
     <img
       id="profile-img"
-      src="assets/material-design-profile.jpg" alt="profile image"
-      class="profile-img-card">
+      src="assets/profile.svg"
+      class="profile-img-card"
+    />
     <form
       *ngIf="!isSuccessful"
       name="form"
-      (ngSubmit)="onSubmit()"
+      (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
-      novalidate>
+      novalidate
+    >
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text"
-               class="form-control"
-               name="username"
-               [(ngModel)]="form.username"
-               required="required"
-               minlength="3"
-               maxlength="20"
-               #username="ngModel">
-
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
         <div class="alert-danger" *ngIf="f.submitted && username.invalid">
           <div *ngIf="username.errors.required">Username is required</div>
           <div *ngIf="username.errors.minlength">
@@ -38,10 +41,10 @@
           class="form-control"
           name="email"
           [(ngModel)]="form.email"
-          required="required"
+          required
           email
           #email="ngModel"
-        >
+        />
         <div class="alert-danger" *ngIf="f.submitted && email.invalid">
           <div *ngIf="email.errors.required">Email is required</div>
           <div *ngIf="email.errors.email">
@@ -56,11 +59,10 @@
           class="form-control"
           name="password"
           [(ngModel)]="form.password"
-          required="required"
+          required
           minlength="6"
           #password="ngModel"
-        >
-
+        />
         <div class="alert-danger" *ngIf="f.submitted && password.invalid">
           <div *ngIf="password.errors.required">Password is required</div>
           <div *ngIf="password.errors.minlength">
@@ -71,10 +73,12 @@
       <div class="form-group">
         <button class="btn btn-primary btn-block">Sign Up</button>
       </div>
+
       <div class="alert alert-warning" *ngIf="f.submitted && isSignupFailed">
-        Signup failed!<br/>{{ errorMessage }}
+        Signup failed!<br />{{ errorMessage }}
       </div>
     </form>
+
     <div class="alert alert-success" *ngIf="isSuccessful">
       Your registration is successful!
     </div>

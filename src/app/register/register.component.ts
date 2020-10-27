@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../_services/auth.service';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-register',
@@ -17,12 +18,12 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.form = [];
   }
 
   onSubmit(): void {
     this.authService.register(this.form).subscribe(
       data => {
-        console.log(data);
         this.isSuccessful = true;
         this.isSignupFailed = false;
       },
